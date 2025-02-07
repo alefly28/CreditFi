@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 
 const Logo = ({ variant = 'default', sx = {} }) => {
+  const theme = useTheme();
   const isSmall = variant === 'small';
-  const height = isSmall ? 32 : 45;
   
   return (
     <Box 
@@ -11,12 +11,14 @@ const Logo = ({ variant = 'default', sx = {} }) => {
       src="/logo.png"
       alt="CreditFi Logo"
       sx={{ 
-        height: height,
+        height: isSmall ? 32 : { xs: 32, sm: 40, md: 45 },
         width: 'auto',
         objectFit: 'contain',
-        transition: 'transform 0.2s ease-in-out',
+        transition: 'all 0.2s ease-in-out',
+        filter: 'brightness(1.1)',
         '&:hover': {
           transform: 'scale(1.02)',
+          filter: 'brightness(1.2)',
         },
         ...sx 
       }}
