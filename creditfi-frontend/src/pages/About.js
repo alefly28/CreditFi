@@ -137,7 +137,12 @@ const About = () => {
       </Grid>
 
       {/* ROI Analysis */}
-      <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
+      <Paper elevation={3} sx={{ 
+        p: 4, 
+        mt: 8, 
+        bgcolor: '#0A1929',
+        borderRadius: 2
+      }}>
         <Typography variant="h4" gutterBottom>
           Platform Economics
         </Typography>
@@ -146,43 +151,136 @@ const About = () => {
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
-            <Box sx={{ bgcolor: theme.palette.grey[100], p: 2, borderRadius: 2 }}>
-              <Typography variant="h6" gutterBottom>
+            <Paper 
+              elevation={2} 
+              sx={{ 
+                p: 3, 
+                height: '100%',
+                bgcolor: '#132F4C',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  bgcolor: '#1a3f63',
+                  borderColor: theme.palette.primary.main
+                }
+              }}
+            >
+              <Typography variant="h6" gutterBottom color="primary">
                 For Lenders
               </Typography>
-              <Typography variant="body2">
-                • Higher yields (up to 2% increase)<br />
-                • Reduced default risk<br />
-                • Better risk assessment<br />
-                • Diversification options
-              </Typography>
-            </Box>
+              <Box component="ul" sx={{ 
+                listStyle: 'none', 
+                p: 0, 
+                m: 0,
+                '& li': {
+                  mb: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  '&::before': {
+                    content: '"•"',
+                    color: theme.palette.primary.main,
+                    fontWeight: 'bold',
+                    mr: 1
+                  }
+                }
+              }}>
+                <li>Higher yields (up to 2% increase)</li>
+                <li>Reduced default risk</li>
+                <li>Better risk assessment</li>
+                <li>Diversification options</li>
+              </Box>
+            </Paper>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Box sx={{ bgcolor: theme.palette.grey[100], p: 2, borderRadius: 2 }}>
-              <Typography variant="h6" gutterBottom>
+            <Paper 
+              elevation={2} 
+              sx={{ 
+                p: 3, 
+                height: '100%',
+                bgcolor: '#132F4C',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  bgcolor: '#1a3f63',
+                  borderColor: theme.palette.primary.main
+                }
+              }}
+            >
+              <Typography variant="h6" gutterBottom color="primary">
                 For Borrowers
               </Typography>
-              <Typography variant="body2">
-                • Lower interest rates (up to 50%)<br />
-                • Reduced collateral requirements<br />
-                • Higher borrowing limits<br />
-                • Portable credit history
-              </Typography>
-            </Box>
+              <Box component="ul" sx={{ 
+                listStyle: 'none', 
+                p: 0, 
+                m: 0,
+                '& li': {
+                  mb: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  '&::before': {
+                    content: '"•"',
+                    color: theme.palette.primary.main,
+                    fontWeight: 'bold',
+                    mr: 1
+                  }
+                }
+              }}>
+                <li>Lower interest rates (up to 50%)</li>
+                <li>Reduced collateral requirements</li>
+                <li>Higher borrowing limits</li>
+                <li>Portable credit history</li>
+              </Box>
+            </Paper>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Box sx={{ bgcolor: theme.palette.grey[100], p: 2, borderRadius: 2 }}>
-              <Typography variant="h6" gutterBottom>
+            <Paper 
+              elevation={2} 
+              sx={{ 
+                p: 3, 
+                height: '100%',
+                bgcolor: '#132F4C',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  bgcolor: '#1a3f63',
+                  borderColor: theme.palette.primary.main
+                }
+              }}
+            >
+              <Typography variant="h6" gutterBottom color="primary">
                 Platform Growth
               </Typography>
-              <Typography variant="body2">
-                • 200% projected TVL growth<br />
-                • 50% reduced default rates<br />
-                • 3x capital efficiency<br />
-                • Sustainable fee structure
-              </Typography>
-            </Box>
+              <Box component="ul" sx={{ 
+                listStyle: 'none', 
+                p: 0, 
+                m: 0,
+                '& li': {
+                  mb: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  '&::before': {
+                    content: '"•"',
+                    color: theme.palette.primary.main,
+                    fontWeight: 'bold',
+                    mr: 1
+                  }
+                }
+              }}>
+                <li>200% projected TVL growth</li>
+                <li>50% reduced default rates</li>
+                <li>3x capital efficiency</li>
+                <li>Sustainable fee structure</li>
+              </Box>
+            </Paper>
           </Grid>
         </Grid>
       </Paper>
