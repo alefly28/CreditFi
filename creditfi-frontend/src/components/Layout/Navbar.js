@@ -1,172 +1,195 @@
-import React, { useEffect, useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, useTheme, Snackbar, Alert } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { 
+  AppBar, 
+  Toolbar, 
+  Button, 
+  Box, 
+  useTheme, 
+  Snackbar, 
+  Alert,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  useMediaQuery
+} from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import CreditGauge from '../Icons/CreditGauge';
-import { useWeb3React } from '@web3-react/core';
-import { injected, getErrorMessage } from '../../utils/web3';
 import Logo from '../Logo/Logo';
 
 const Navbar = () => {
   const theme = useTheme();
-  const { active, account, activate, deactivate } = useWeb3React();
-  const [error, setError] = useState('');
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [walletAddress, setWalletAddress] = useState('');
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
+  const location = useLocation();
 
-  useEffect(() => {
-    // Try to activate with injected provider if already authorized
-    injected.isAuthorized().then((isAuthorized) => {
-      if (isAuthorized) {
-        activate(injected).catch((error) => {
-          setError(getErrorMessage(error));
-        });
-      }
-    });
-  }, [activate]);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const navItems = [
+    { title: 'Home', path: '/' },
+    { title: 'Dashboard', path: '/dashboard' },
+    { title: 'Documentation', path: '/docs' },
+    { title: 'About', path: '/about' }
+  ];
 
   const connectWallet = async () => {
-    try {
-      await activate(injected);
-    } catch (error) {
-      setError(getErrorMessage(error));
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setWalletAddress(accounts[0]);
+        setSnackbar({
+          open: true,
+          message: 'Wallet connected successfully!',
+          severity: 'success'
+        });
+      } catch (error) {
+        setSnackbar({
+          open: true,
+          message: 'Failed to connect wallet: ' + error.message,
+          severity: 'error'
+        });
+      }
+    } else {
+      setSnackbar({
+        open: true,
+        message: 'Please install MetaMask to connect your wallet',
+        severity: 'warning'
+      });
     }
   };
 
-  const disconnectWallet = () => {
-    try {
-      deactivate();
-    } catch (error) {
-      setError(getErrorMessage(error));
-    }
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
   };
 
-  const handleCloseError = () => {
-    setError('');
-  };
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Box sx={{ my: 2 }}>
+        <Logo variant="small" />
+      </Box>
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item.title} component={Link} to={item.path}>
+            <ListItemText 
+              primary={item.title}
+              sx={{
+                color: location.pathname === item.path ? theme.palette.primary.main : 'inherit',
+                textAlign: 'center'
+              }}
+            />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
     <>
       <AppBar 
-        position="static" 
-        sx={{ 
-          background: 'linear-gradient(90deg, #006D77 0%, #83C5BE 100%)',
-          borderBottom: '1px solid rgba(255,255,255,0.1)'
+        position="sticky" 
+        color="default" 
+        elevation={0}
+        sx={{
+          borderBottom: `1px solid ${theme.palette.divider}`,
+          backdropFilter: 'blur(20px)',
+          backgroundColor: 'rgba(19, 47, 76, 0.4)',
         }}
       >
-        <Toolbar sx={{ py: 1 }}>
-          <Box component={Link} to="/" sx={{ textDecoration: 'none', color: 'white', flexGrow: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
-            <CreditGauge sx={{ fontSize: 36, color: 'white', mt: 0.5 }} />
-            <Logo sx={{ height: 45, filter: 'brightness(1)' }} />
-          </Box>
-          <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
-            <Button 
-              color="inherit" 
-              component={Link} 
-              to="/about"
-              sx={{ 
-                fontSize: '0.95rem',
-                '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' }
-              }}
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          {isMobile && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2 }}
             >
-              About
-            </Button>
-            <Button 
-              color="inherit" 
-              component={Link} 
-              to="/docs"
-              sx={{ 
-                fontSize: '0.95rem',
-                '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' }
-              }}
-            >
-              Docs
-            </Button>
-            <Button 
-              color="inherit" 
-              component={Link} 
-              to="/dashboard"
-              sx={{ 
-                fontSize: '0.95rem',
-                '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' }
-              }}
-            >
-              Dashboard
-            </Button>
-            <Button 
-              color="inherit" 
-              component={Link} 
-              to="/borrow"
-              sx={{ 
-                fontSize: '0.95rem',
-                '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' }
-              }}
-            >
-              Borrow
-            </Button>
-            <Button 
-              color="inherit" 
-              component={Link} 
-              to="/lend"
-              sx={{ 
-                fontSize: '0.95rem',
-                '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' }
-              }}
-            >
-              Lend
-            </Button>
-            <Button 
-              color="inherit" 
-              component={Link} 
-              to="/credit-score"
-              sx={{ 
-                fontSize: '0.95rem',
-                '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' }
-              }}
-            >
-              Credit Score
-            </Button>
-            {active && account ? (
-              <Button 
-                variant="outlined" 
-                color="inherit" 
-                startIcon={<AccountBalanceWalletIcon />}
-                onClick={disconnectWallet}
-                sx={{
-                  borderColor: 'rgba(255,255,255,0.5)',
-                  '&:hover': {
-                    borderColor: 'rgba(255,255,255,0.8)',
-                    backgroundColor: 'rgba(255,255,255,0.1)'
-                  }
-                }}
-              >
-                {`${account.slice(0, 6)}...${account.slice(-4)}`}
-              </Button>
-            ) : (
-              <Button 
-                variant="contained" 
-                onClick={connectWallet}
-                sx={{ 
-                  bgcolor: 'white', 
-                  color: theme.palette.primary.main,
-                  fontWeight: 600,
-                  '&:hover': {
-                    bgcolor: 'rgba(255, 255, 255, 0.9)',
-                  }
-                }}
-              >
-                Connect Wallet
-              </Button>
-            )}
-          </Box>
+              <MenuIcon />
+            </IconButton>
+          )}
+          
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <Logo variant={isMobile ? 'small' : 'default'} />
+          </Link>
+
+          {!isMobile && (
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              {navItems.map((item) => (
+                <Button
+                  key={item.title}
+                  component={Link}
+                  to={item.path}
+                  sx={{
+                    color: location.pathname === item.path ? theme.palette.primary.main : 'inherit',
+                    '&:hover': {
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                >
+                  {item.title}
+                </Button>
+              ))}
+            </Box>
+          )}
+
+          <Button
+            variant="contained"
+            startIcon={<AccountBalanceWalletIcon />}
+            onClick={connectWallet}
+            sx={{
+              ml: 2,
+              background: theme.palette.primary.main,
+              '&:hover': {
+                background: theme.palette.primary.dark,
+              },
+            }}
+          >
+            {walletAddress 
+              ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+              : 'Connect Wallet'
+            }
+          </Button>
         </Toolbar>
       </AppBar>
-      <Snackbar 
-        open={!!error} 
-        autoHideDuration={6000} 
-        onClose={handleCloseError}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+
+      <Drawer
+        variant="temporary"
+        anchor="left"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { 
+            boxSizing: 'border-box', 
+            width: 240,
+            backgroundColor: theme.palette.background.paper,
+          },
+        }}
       >
-        <Alert onClose={handleCloseError} severity="error" sx={{ width: '100%' }}>
-          {error}
+        {drawer}
+      </Drawer>
+
+      <Snackbar 
+        open={snackbar.open} 
+        autoHideDuration={6000} 
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert 
+          onClose={handleCloseSnackbar} 
+          severity={snackbar.severity}
+          sx={{ width: '100%' }}
+        >
+          {snackbar.message}
         </Alert>
       </Snackbar>
     </>
