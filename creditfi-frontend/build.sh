@@ -1,12 +1,27 @@
 #!/usr/bin/env bash
-# exit on error
-set -o errexit
 
-# Install dependencies
-npm install
+# Exit on error
+set -e
 
-# Build the project
-npm run build
+echo "Starting build process..."
 
-# Move build files to the right location
-mv build/* . 
+# Navigate to frontend directory if not already there
+if [[ ! -f "package.json" ]]; then
+  cd creditfi-frontend
+fi
+
+echo "Installing dependencies..."
+npm install --legacy-peer-deps
+
+echo "Building the project..."
+CI=false npm run build
+
+echo "Moving build files..."
+if [[ -d "build" ]]; then
+  cp -r build/* .
+else
+  echo "Build directory not found!"
+  exit 1
+fi
+
+echo "Build completed successfully!" 

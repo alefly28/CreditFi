@@ -1,10 +1,15 @@
 services:
   - type: web
-    name: creditfi
+    name: creditfi-frontend
     env: static
-    buildCommand: cd creditfi-frontend && npm install && CI=false npm run build
-    staticPublishPath: creditfi-frontend/build
+    buildCommand: cd creditfi-frontend && ./build.sh
+    staticPublishPath: ./creditfi-frontend
     pullRequestPreviewsEnabled: true
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: NODE_ENV
+        value: production
     headers:
       - path: /*
         name: Cache-Control
@@ -12,11 +17,4 @@ services:
     routes:
       - type: rewrite
         source: /*
-        destination: /index.html
-    envVars:
-      - key: NODE_VERSION
-        value: 18.0.0
-      - key: NODE_ENV
-        value: production
-      - key: CI
-        value: false 
+        destination: /index.html 
