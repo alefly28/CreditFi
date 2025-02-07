@@ -2,9 +2,19 @@ services:
   - type: web
     name: creditfi-frontend
     env: static
-    buildCommand: cd creditfi-frontend && ./build.sh
-    staticPublishPath: ./creditfi-frontend
+    rootDir: creditfi-frontend
+    buildCommand: ./build.sh
+    staticPublishPath: ./build
     pullRequestPreviewsEnabled: true
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - creditfi-frontend/**/*
+      ignoredPaths:
+        - contracts/**/*
+        - test/**/*
+        - scripts/**/*
+        - "*.md"
     envVars:
       - key: NODE_VERSION
         value: 18
