@@ -90,7 +90,7 @@ const Home = () => {
     },
     {
       title: 'Token Economics',
-      content: 'CRFI token will have a fixed supply of $100M tokens with no possible minting of new tokens. This is the most important part as we want the tokenomics to favour buyers by being deflationary and also with a revenue share percentage through various programs. The rest is yet to be defined.',
+      content: 'CRFI token will have a fixed supply of $100M tokens with no possible minting of new tokens. This is the most important part as we want the tokenomics to favour buyers by being deflationary along with periodically burning a percentage of the supply until 5% of the total supply has been burned, automatically creating a deflationary mechanism.',
       icon: <MonetizationOnIcon sx={{ fontSize: 40 }} />
     }
   ];
