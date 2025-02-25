@@ -101,7 +101,7 @@ const Documentation = () => {
             <Typography variant="body1">
               To integrate with CreditFi, use our Web3 library and smart contract ABIs:
             </Typography>
-             <Paper elevation={3} sx={{ p: 4, mb: 8 }}>
+             <Paper sx={{ p: 4, mb: 8 }}>
               <pre style={{ margin: 0, overflow: 'auto' }}>
 {`// Example integration code
 const creditScore = await CreditScore.attach(CONTRACT_ADDRESS);
@@ -124,7 +124,7 @@ const score = await creditScore.getUserScore(userAddress);`}
             <Typography variant="body1" paragraph>
               The credit score (0-850) is calculated using the following formula:
             </Typography>
-            <Paper sx={{ p: 2, bgcolor: theme.palette.grey[100], my: 2 }}>
+            <Paper sx={{ p: 4, mb: 8 }}>
               <pre style={{ margin: 0, overflow: 'auto' }}>
 {`Score = (RepaymentHistory * 0.4) +
        (WalletBalance * 0.2) +
