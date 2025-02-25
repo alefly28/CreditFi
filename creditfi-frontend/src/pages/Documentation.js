@@ -101,7 +101,7 @@ const Documentation = () => {
             <Typography variant="body1">
               To integrate with CreditFi, use our Web3 library and smart contract ABIs:
             </Typography>
-            <Paper sx={{ p: 2, bgcolor: theme.palette.grey[100], my: 2 }}>
+             <Paper elevation={3} sx={{ p: 4, mb: 8 }}>
               <pre style={{ margin: 0, overflow: 'auto' }}>
 {`// Example integration code
 const creditScore = await CreditScore.attach(CONTRACT_ADDRESS);
