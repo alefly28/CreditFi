@@ -166,7 +166,7 @@ const Home = () => {
       icon: <EmailIcon sx={{ fontSize: 40 }} />,
       title: "General Inquiries",
       description: "Questions about our protocol or services? Reach out to our team.",
-      email: "automateaisolutions@mail.com"
+      email: "creditfi@mail.com"
     },
     {
       icon: <BusinessIcon sx={{ fontSize: 40 }} />,
