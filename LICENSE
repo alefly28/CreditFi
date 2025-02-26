@@ -1,21 +1,53 @@
-MIT License
+CreditFi Proprietary License
 
-Copyright (c) 2024 CreditFi
+Copyright (c) 2024 CreditFi. All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Definitions
+"Software" refers to the CreditFi platform, including all source code, documentation, and associated materials.
+"Licensor" refers to CreditFi and its copyright holders.
+"User" refers to any individual or entity accessing or using the Software.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. Restrictions
+This Software is proprietary and confidential. No part of this Software may be:
+a) Copied, distributed, or modified without express written permission
+b) Used for commercial purposes without a valid license agreement
+c) Reverse engineered, decompiled, or disassembled
+d) Used to create derivative works
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+3. Limited License
+The Licensor grants Users a limited, non-exclusive, non-transferable license to:
+a) View the public interfaces of the Software
+b) Interact with deployed instances of the Software
+c) Use the Software's services as intended
+
+4. Intellectual Property
+All intellectual property rights, including but not limited to:
+- Patents
+- Copyrights
+- Trade secrets
+- Trademarks
+related to the Software remain the exclusive property of the Licensor.
+
+5. Confidentiality
+Users agree to maintain the confidentiality of any non-public aspects of the Software, including:
+- Source code
+- Architecture
+- Technical specifications
+- Business logic
+
+6. Termination
+This license automatically terminates if you breach any of these terms. Upon termination, you must:
+a) Cease all use of the Software
+b) Destroy all copies of the Software
+c) Remove all deployments of the Software
+
+7. Warranty Disclaimer
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+8. Limitation of Liability
+IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY DAMAGES ARISING FROM THE USE OF THE SOFTWARE.
+
+9. Governing Law
+This license shall be governed by and construed in accordance with the laws of [Your Jurisdiction].
+
+For licensing inquiries, contact: legal@creditfi.finance
