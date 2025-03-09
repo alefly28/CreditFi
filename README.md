@@ -1,121 +1,121 @@
-# CreditFi - DeFi Lending with On-Chain Credit Scoring
+# CreditFi
 
-CreditFi is a revolutionary DeFi lending platform that introduces on-chain credit scoring to reduce collateral requirements and improve capital efficiency.
+CreditFi is a decentralized lending platform that introduces credit scores to crypto lending, making DeFi lending more accessible and efficient.
+
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://creditfi.onrender.com)
+[![License](https://img.shields.io/badge/license-Proprietary-red.svg)](./LICENSE)
+[![Security: Bug Bounty](https://img.shields.io/badge/security-bug%20bounty-blue)](./SECURITY.md)
+
+## Important Notice
+
+This software is proprietary and confidential. Use is subject to license terms. See [LICENSE](./LICENSE) and [TERMS_OF_USE.md](./TERMS_OF_USE.md) for details.
 
 ## Features
 
-- 🏦 **On-Chain Credit Scoring**: Analyze user behavior to establish creditworthiness
-- 💰 **Reduced Collateral**: As low as 110% for qualified borrowers
-- 📈 **Dynamic Interest Rates**: Based on credit scores and market conditions
-- 🔒 **Non-Custodial**: Users maintain full control of their assets
-- 🌐 **Cross-Chain Support**: Initially on Ethereum, expanding to other chains
-- ⚡ **Modern UI/UX**: Intuitive interface with real-time updates
+- 🏦 Decentralized lending and borrowing
+- 📈 DeFi credit score system (0-850)
+- 🔒 Flash loan protection
+- 💰 Competitive interest rates
+- 🎁 Loyalty rewards program
+- ⚡ Real-time transaction notifications
+- 📱 Mobile-responsive interface
 
 ## Quick Start
 
+1. Visit [CreditFi](https://creditfi.onrender.com)
+2. Connect your wallet
+3. Get testnet tokens from our faucet
+4. Start lending or borrowing!
+
+## For Developers
+
 ### Prerequisites
 
-- Node.js v16+
-- npm or yarn
-- MetaMask or another Web3 wallet
-- Sepolia testnet ETH
+- Node.js >= 14
+- npm >= 6
+- Hardhat
 
 ### Installation
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/creditfi.git
+git clone https://github.com/alefly28/creditfi.git
 cd creditfi
-```
-
-2. Install dependencies:
-```bash
-# Install smart contract dependencies
-npm install
-
-# Install frontend dependencies
-cd creditfi-frontend
 npm install
 ```
 
-3. Set up environment variables:
-```bash
-# In the root directory
-cp .env.example .env
-# Edit .env with your configuration
+### Configuration
 
-# In the frontend directory
-cd creditfi-frontend
-cp .env.example .env
-# Edit .env with your configuration
+Create a `.env` file:
+```env
+PRIVATE_KEY=your_private_key
+ALCHEMY_API_KEY=your_alchemy_key
+ETHERSCAN_API_KEY=your_etherscan_key
 ```
 
-4. Run the development server:
-```bash
-# Start frontend
-cd creditfi-frontend
-npm start
-
-# In a separate terminal, run local blockchain (optional)
-npx hardhat node
-```
-
-### Smart Contract Deployment
-
-1. Deploy to local network:
-```bash
-npx hardhat run scripts/deploy.js --network localhost
-```
-
-2. Deploy to Sepolia testnet:
-```bash
-npx hardhat run scripts/deploy.js --network sepolia
-```
-
-## Project Structure
-
-```
-creditfi/
-├── contracts/               # Smart contracts
-├── scripts/                 # Deployment & test scripts
-├── test/                    # Contract test files
-├── creditfi-frontend/       # React frontend application
-├── hardhat.config.js        # Hardhat configuration
-└──             # Project dependencies
-```
-
-## Testing
+### Running Tests
 
 ```bash
-# Run contract tests
 npx hardhat test
-
-# Run frontend tests
-cd creditfi-frontend
-npm test
+npx hardhat coverage
 ```
+
+### Local Development
+
+```bash
+# Start local hardhat node
+npx hardhat node
+
+# Deploy contracts
+npx hardhat run scripts/deploy.js --network localhost
+
+# Start frontend
+cd frontend
+npm install
+npm start
+```
+
+## Smart Contracts (Sepolia Testnet)
+
+- CreditScore: [address]
+- LendingPool: [address]
+- LendingGovernance: [address]
+- TestnetFaucet: [address]
+
+## Security
+
+- [Security Policy and Bug Bounty](./SECURITY.md)
+- [Audit Preparation](./AUDIT.md)
+- [Known Issues](./SECURITY.md#known-issues)
+
+## Documentation
+
+- [Technical Documentation](https://docs.creditfi.finance)
+- [API Documentation](https://api.creditfi.finance/docs)
+- [User Guide](https://docs.creditfi.finance/guide)
+- [GitHub Repository](https://github.com/alefly28/CreditFi) - Full source code and documentation
 
 ## Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-## Security
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
-- Smart contracts are open source and verified on Etherscan
-- Regular security audits planned
-- Bug bounty program coming soon
-- Emergency pause functionality for critical issues
+## Community
+
+- [Discord](https://discord.gg/creditfi)
+- [Twitter](https://twitter.com/CreditFi_)
+- [Blog](https://blog.creditfi.finance)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
+## Acknowledgments
 
-- Email: automateaisolutions@mail.com
-- Twitter: [@CreditFi](https://twitter.com/creditfi)
-- Discord: [Join our community](https://discord.gg/creditfi)
+- OpenZeppelin for secure contract implementations
+- Chainlink for price feeds
+- The entire DeFi community for inspiration
