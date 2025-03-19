@@ -18,7 +18,23 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 18.0.0
+      - key: CI
+        value: false
       - key: REACT_APP_CHAIN_ID
         value: 11155111
-      - key: REACT_APP_DEFAULT_NETWORK  
-        value: 11155111 
+      - key: REACT_APP_DEFAULT_NETWORK
+        value: 11155111
+      - key: REACT_APP_INFURA_KEY
+        sync: false
+      - key: REACT_APP_CREDIT_SCORE_ADDRESS
+        sync: false
+      - key: REACT_APP_LENDING_POOL_ADDRESS
+        sync: false
+      - key: REACT_APP_LENDING_REWARDS_ADDRESS
+        sync: false
+    buildFilter:
+      paths:
+      - src/**
+      - public/**
+      - package.json
+      - package-lock.json 
