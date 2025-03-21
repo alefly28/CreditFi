@@ -1,6 +1,0 @@
-{
-  "creditScore": "deployed_credit_score_address",
-  "lendingToken": "deployed_lending_token_address",
-  "lendingPool": "deployed_lending_pool_address",
-  "lendingRewards": "deployed_lending_rewards_address"
-} 
