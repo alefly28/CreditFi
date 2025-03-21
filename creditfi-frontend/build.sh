@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Exit on error
 set -e
@@ -9,6 +9,6 @@ echo "Installing dependencies..."
 npm install --legacy-peer-deps
 
 echo "Building the project..."
-CI=false npm run build
+CI=false GENERATE_SOURCEMAP=false npm run build
 
 echo "Build completed successfully!" 
