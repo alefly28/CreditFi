@@ -1,9 +1,11 @@
+import { DEFAULT_ADDRESSES } from './addresses';
+
 // Contract addresses configuration
 const CONTRACT_ADDRESSES = {
   11155111: { // Sepolia testnet
-    CreditScore: process.env.REACT_APP_CREDIT_SCORE_ADDRESS,
-    LendingPool: process.env.REACT_APP_LENDING_POOL_ADDRESS,
-    LendingRewards: process.env.REACT_APP_LENDING_REWARDS_ADDRESS
+    CreditScore: process.env.REACT_APP_CREDIT_SCORE_ADDRESS || DEFAULT_ADDRESSES.CreditScore,
+    LendingPool: process.env.REACT_APP_LENDING_POOL_ADDRESS || DEFAULT_ADDRESSES.LendingPool,
+    LendingRewards: process.env.REACT_APP_LENDING_REWARDS_ADDRESS || DEFAULT_ADDRESSES.LendingRewards
   }
 };
 
@@ -47,4 +49,4 @@ export const CONTRACT_ABIS = {
     'function claimRewards() returns (uint256)',
     'function getRewardsBalance(address) view returns (uint256)'
   ]
-}; 
+};
