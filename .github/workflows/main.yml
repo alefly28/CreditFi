@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '16.x'
       - name: Install dependencies for smart contracts
-        run: npm ci
+        run: npm ci || npm ci
       - name: Install Hardhat explicitly
         run: npm install --save-dev hardhat @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers ethereum-waffle ethers
       - name: Run contract compilation
@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies for frontend
         run: |
           cd creditfi-frontend
-          npm ci --legacy-peer-deps
+          npm install --legacy-peer-deps || npm install --legacy-peer-deps
       - name: Run frontend tests
         run: |
           cd creditfi-frontend
@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies for frontend
         run: |
           cd creditfi-frontend
-          npm ci --legacy-peer-deps
+          npm install --legacy-peer-deps || npm install --legacy-peer-deps
       - name: Run linting
         run: |
           cd creditfi-frontend
@@ -60,7 +60,7 @@ jobs:
         with:
           node-version: '16.x'
       - name: Install dependencies
-        run: npm ci
+        run: npm ci || npm ci
       - name: Install Hardhat explicitly
         run: npm install --save-dev hardhat @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan ethereum-waffle ethers
       - name: Deploy to Sepolia
@@ -83,7 +83,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd creditfi-frontend
-          npm ci --legacy-peer-deps
+          npm install --legacy-peer-deps || npm install --legacy-peer-deps
       - name: Build
         run: |
           cd creditfi-frontend
