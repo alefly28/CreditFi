@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: creditfi
+    env: static
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    staticPublishPath: ./build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+      - path: /static/*
+        name: Cache-Control
+        value: public, max-age=31536000
+    envVars:
+      - key: NODE_VERSION
+        value: 16.0.0
+      - key: CI
+        value: false
+      - key: REACT_APP_CHAIN_ID
+        value: 11155111
+      - key: REACT_APP_DEFAULT_NETWORK
+        value: 11155111
+      - key: REACT_APP_INFURA_KEY
+        value: 7354b81f8828486a881d5958c7fc9ac4
+      - key: REACT_APP_CREDIT_SCORE_ADDRESS
+        value: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+      - key: REACT_APP_LENDING_POOL_ADDRESS
+        value: 0x9fE46736679d2D9a592272A55d612BAeEa3F0777
+      - key: REACT_APP_LENDING_REWARDS_ADDRESS
+        value: 0x4200000000000000000000000000000000000006
+    buildFilter:
+      paths:
+      - src/**
+      - public/**
+      - package.json
+      - package-lock.json 

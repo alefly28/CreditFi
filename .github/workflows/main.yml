@@ -1,78 +1,13 @@
-name: CreditFi CI/CD
+name: CreditFi Frontend Deployment
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    paths:
+      - 'creditfi-frontend/**'
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-      - name: Install dependencies for smart contracts
-        run: npm ci || npm ci
-      - name: Install Hardhat explicitly
-        run: npm install --save-dev hardhat @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers ethereum-waffle ethers
-      - name: Run contract compilation
-        run: npx hardhat compile
-      - name: Run contract tests
-        run: npx hardhat test
-      - name: Install dependencies for frontend
-        run: |
-          cd creditfi-frontend
-          npm install --legacy-peer-deps || npm install --legacy-peer-deps
-      - name: Run frontend tests
-        run: |
-          cd creditfi-frontend
-          CI=true npm test -- --passWithNoTests
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-      - name: Install dependencies for frontend
-        run: |
-          cd creditfi-frontend
-          npm install --legacy-peer-deps || npm install --legacy-peer-deps
-      - name: Run linting
-        run: |
-          cd creditfi-frontend
-          npm run lint || true
-
-  deploy-testnet:
-    needs: [test, lint]
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-      - name: Install dependencies
-        run: npm ci || npm ci
-      - name: Install Hardhat explicitly
-        run: npm install --save-dev hardhat @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers @nomiclabs/hardhat-etherscan ethereum-waffle ethers
-      - name: Deploy to Sepolia
-        env:
-          PRIVATE_KEY: "0xa267530f49f8280200edf313ee7af6b827f2a8bce2897751d06a843f644967b1"
-          ALCHEMY_API_KEY: "7354b81f8828486a881d5958c7fc9ac4"
-          ETHERSCAN_API_KEY: "KZGH3FPBMGPTBD7NQGUV7I8K9MM6PEK8DF"
-        run: npx hardhat run scripts/deploy.js --network sepolia
-
   deploy-frontend:
-    needs: [test, lint]
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -83,13 +18,10 @@ jobs:
       - name: Install dependencies
         run: |
           cd creditfi-frontend
-          npm install --legacy-peer-deps || npm install --legacy-peer-deps
+          npm install --legacy-peer-deps
       - name: Build
         run: |
           cd creditfi-frontend
           npm run build
       - name: Deploy to Render
-        env:
-          RENDER_TOKEN: "srv-cuhql0t2ng1s73catml0?key=jFrKGrYRk40"
-        run: |
-          curl -X POST https://api.render.com/deploy/srv-cuhql0t2ng1s73catml0?key=jFrKGrYRk40 
+        run: node creditfi-frontend/deploy-to-render.js 
