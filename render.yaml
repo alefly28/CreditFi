@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: creditfi-frontend
+    env: static
+    rootDir: creditfi-frontend
+    buildCommand: ./build.sh
+    staticPublishPath: ./build
+    pullRequestPreviewsEnabled: true
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - creditfi-frontend/**/*
+      ignoredPaths:
+        - contracts/**/*
+        - test/**/*
+        - scripts/**/*
+        - "*.md"
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: NODE_ENV
+        value: production
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html 
